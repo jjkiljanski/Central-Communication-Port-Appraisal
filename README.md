@@ -1,6 +1,6 @@
 # Appraisal of Investment in the Railway component of the Central Communication Port (CPK) in Poland
 
-**© [Your Name]**
+**© Jan Kiljański**
 
 ## Project Overview
 
@@ -46,7 +46,7 @@ Poland-specific shapefiles have been added to support spatial analysis and visua
 
 When using this repository in your work, please cite it as:
 
-Kiljański, J. (2024): Appraisal of Investment in the Railway component of the Central Communication Port (CPK) in Poland. [GitHub Repository URL]
+Kiljański, J. (2024): Appraisal of Investment in the Railway component of the Central Communication Port (CPK) in Poland. https://github.com/jjkiljanski/Central-Communication-Port-Appraisal.git
 
 Please also consider citing the original toolkit and the relevant academic papers associated with this work.
 
