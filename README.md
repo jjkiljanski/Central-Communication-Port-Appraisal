@@ -6,20 +6,25 @@
 
 This repository is a fork of the "Toolkit for Quantitative Spatial Models" developed by Gabriel Ahlfeldt and Tobias Seidel. The original repository provides a MATLAB framework for simulating and analyzing quantitative spatial economic model à la Monte, Redding, and Rossi-Hansberg (2018).
 
-In this fork, the toolkit has been adapted to study the economic impacts of the construction of the so called "Y-line" railway, a significant component of the Central Communication Port (CPK) project in Poland. The Y-line project aims to enhance railway connectivity across key regions in Poland, and this repository provides the necessary modifications and data to apply the Monte, Redding, and Rossi-Hansberg (2018) model to assess its potential economic effects.
+In this fork, the toolkit has been adapted to study the economic impacts of the three most important scenarios of the development of Polish railway infrastructure:
+1. The construction of the so called "Y-line" railway, a significant component of the Central Communication Port (CPK) project in Poland.
+2. The so called "Spokes" project proposed by PiS government
+3. The KO project proposed by the new government that came to power in the late 2023.
+
+All the projects aim to enhance railway connectivity across key regions in Poland, and this repository provides the necessary modifications and data to apply the Monte, Redding, and Rossi-Hansberg (2018) model to assess their potential economic effects and compare them.
 
 ## Objectives
 
-The primary objective of this project is to apply the quantitative spatial model to analyze how the Y-line railway project might influence spatial economic outcomes in Poland. This includes examining changes in commuting patterns, employment distribution, and other relevant economic indicators under various scenarios associated with the new infrastructure.
+The primary objective of this project is to apply the quantitative spatial model to analyze how the considered railway projects might influence spatial economic outcomes in Poland. This includes examining changes in commuting patterns, employment distribution, and other relevant economic indicators under various scenarios associated with the new infrastructure.
 
 ## Specific Modifications and Additions
 
 ### Data Inputs
 
-The original toolkit has been supplemented with Poland-specific data relevant to the Y-line project:
+The original toolkit has been supplemented with Poland-specific data relevant to all the three projects:
 
 - **Poland Commuting Data:** Bilateral commuting flows specific to regions affected by the Y-line.
-- **Distance Matrices:** Updated matrices that reflect travel times and distances within Poland, with special focus on regions connected by the Y-line.
+- **Distance Matrices:** Updated matrices that reflect travel times and distances within Poland.
 - **Economic Indicators:** Region-specific economic data such as employment, population, and wages, tailored to the Polish context.
 
 ### Custom MATLAB Scripts
@@ -27,14 +32,18 @@ The original toolkit has been supplemented with Poland-specific data relevant to
 Additional scripts have been created or modified to facilitate the analysis of the Y-line project:
 
 - `ReadPolandData.m`: A script to load and preprocess Poland-specific data inputs.
-- `YlineCounterfactuals.m`: A modified counterfactual analysis script to assess the impact of the Y-line on regional economic outcomes.
-- `VisualizePoland.m`: A script to generate visualizations of the model outputs specific to the Y-line project, utilizing Polish shapefiles.
+- `Counterfactuals.m`: A modified counterfactual analysis script to assess the impact of the Y-line on regional economic outcomes.
+- `transport_matrix_computation.ipynb`: Python script to produce the transport matrix from shapefiles extracted from OpenSteetMap
 
 ### Shapefiles
 
 Poland-specific shapefiles have been added to support spatial analysis and visualization:
 
-- **Poland Regions:** Shapefiles corresponding to the regions impacted by the Y-line.
+- **powiaty.shp:** Shapefiles with all the counties in Poland.
+- **powiaty_centroids.shp:** Centroids of counties in Poland.
+- **poland-railway-proposed-latest-y.shp:** Schema of the Railway Expansion in the Y-Line Scenario.
+- **poland-railways-proposed-pis.shp:** Schema of the Railway Expansion in the PiS "Spokes" Scenario.
+- **KO.shp** Schema of the railway in the KO Scenario.
 
 ## How to Use This Repository
 
