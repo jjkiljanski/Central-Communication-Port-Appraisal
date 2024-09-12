@@ -1,0 +1,1 @@
+osmosis --read-pbf file="input.osm.pbf" --tf accept-ways railway=* --used-node --write-pbf file="all_railways.osm.pbf"

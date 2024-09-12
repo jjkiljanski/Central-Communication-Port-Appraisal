@@ -1,0 +1,73 @@
+function [wChange, vChange, qChange, piChange, lamChange, pChange, rChange, lChange, welfChange] = processCounterfactual(dist_mat_rail_ctf, dist_mat_highway_future, dni, psi, J, w_n, v_n, uncondCom, L_n, R_n, tradesh, outputDir, scenarioIndex)
+    % Process the railway distance matrix
+    sortedRow = @(row) sort(row(row > 0), 'ascend');
+    for i = 1:size(dist_mat_rail_ctf, 1)
+        if dist_mat_rail_ctf(i, i) == 0
+            values = sortedRow(dist_mat_rail_ctf(i, :));
+            dist_mat_rail_ctf(i, i) = mean(values(1:3));
+            dist_mat_rail_ctf(i, i) = dist_mat_rail_ctf(i, i) / 2;
+        end
+    end
+
+    % Calculate distance matrix
+    dist_mat_ctf = (dist_mat_rail_ctf.^0.09) .* (dist_mat_highway_future.^0.91);
+    dist_mat_ctf = dist_mat_ctf / min(dist_mat_ctf(:));
+    dni_change = dist_mat_ctf.^psi;
+
+    % Primitives that do not change => Changes are set to ones
+    aChange = ones(J, 1);
+    bChange = ones(J);
+    dChange = ones(J);
+    kapChange = ones(J, J);
+
+    % Set the change in commuting cost
+    kapChange = dni_change ./ dni;
+
+    % Solve for counterfactual values
+    [wChange, vChange, qChange, piChange, lamChange, pChange, rChange, lChange, welfChange] = counterFactsTK(...
+        aChange, bChange, kapChange, dChange, w_n, v_n, uncondCom, L_n, R_n, tradesh);
+
+    % Define headers for each variable based on the description
+    headers_wChange = {sprintf('Regional wages (scenario %d) - change relative to 2021', scenarioIndex)};
+    headers_vChange = {sprintf('Average residential wages (scenario %d) - change relative to 2021', scenarioIndex)};
+    headers_qChange = {sprintf('Regional house prices (scenario %d) - change relative to 2021', scenarioIndex)};
+    headers_pChange = {sprintf('Regional price indices (scenario %d) - change relative to 2021', scenarioIndex)};
+    headers_rChange = {sprintf('Population density (scenario %d) - change relative to 2021', scenarioIndex)};
+    headers_lChange = {sprintf('Regional employment (scenario %d) - change relative to 2021', scenarioIndex)};
+    headers_welfChange = {sprintf('Aggregate worker welfare (scenario %d) - change relative to 2021', scenarioIndex)};
+    
+    % Save counterfactual results
+    % Write as matrix with Header
+    writeMatrixWithHeader(wChange, headers_wChange, outputDir, sprintf('ctf%d_wChange.csv', scenarioIndex));
+    writeMatrixWithHeader(vChange, headers_vChange, outputDir, sprintf('ctf%d_vChange.csv', scenarioIndex));
+    writeMatrixWithHeader(qChange, headers_qChange, outputDir, sprintf('ctf%d_qChange.csv', scenarioIndex));
+    % Write as matrix
+    writematrix(piChange, fullfile(outputDir, sprintf('ctf%d_piChange.csv', scenarioIndex)));
+    writematrix(lamChange, fullfile(outputDir, sprintf('ctf%d_lamChange.csv', scenarioIndex)));
+    % Write as matrix with Header
+    writeMatrixWithHeader(pChange, headers_pChange, outputDir, sprintf('ctf%d_pChange.csv', scenarioIndex));
+    writeMatrixWithHeader(rChange, headers_rChange, outputDir, sprintf('ctf%d_rChange.csv', scenarioIndex));
+    writeMatrixWithHeader(lChange, headers_lChange, outputDir, sprintf('ctf%d_lChange.csv', scenarioIndex));
+    % Write as matrix
+    writematrix(welfChange, fullfile(outputDir, sprintf('ctf%d_welfChange.csv', scenarioIndex)));
+
+    % Compute changes in average distance
+    dist_mat_rail = readmatrix('data/output/MAP_dist_mat_rail.csv');
+    dist_mat_highway = readmatrix('data/output/MAP_dist_mat_highway.csv');
+    dist_mat_rail_future = readmatrix('data/output/MAP_dist_mat_rail_future.csv');
+
+    avDistChange_rail = (mean(dist_mat_rail_ctf, 2)) ./ (mean(dist_mat_rail_future, 2));
+    avDist_ctf = (mean(((dist_mat_rail_ctf.^0.09) .* (dist_mat_highway_future.^0.91)), 2)) ./ (mean(((dist_mat_rail_future.^0.09) .* (dist_mat_highway_future.^0.91)), 2));
+
+    future_dni = readmatrix('data/output/MAP_fut_dni.csv');
+    avKapChange = mean(dni_change, 2);
+    % Save changes in average counterfactual accessibility
+    headers_avDist = {sprintf('Average distance to other counties (scenario %d) - change relative to future baseline', scenarioIndex)};
+    headers_avDist_rail = {sprintf('Average rail distance to other counties (scenario %d) - change relative to future baseline', scenarioIndex)};
+    headers_avKapChange = {sprintf('Average change in commuting costs (scenario %d) - change relative to 2021', scenarioIndex)};
+    writeMatrixWithHeader(avDistChange, headers_avDist, outputDir, sprintf('ctf%d_AvDist.csv', scenarioIndex));
+    writeMatrixWithHeader(avDistChange_rail, headers_avDist, outputDir, sprintf('ctf%d_AvDistRail.csv', scenarioIndex));
+    writeMatrixWithHeader(avKapChange, headers_avKapChange, outputDir, sprintf('ctf%d_avKapChange.csv', scenarioIndex));
+    
+
+end
