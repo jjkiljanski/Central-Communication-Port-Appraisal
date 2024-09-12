@@ -45,20 +45,19 @@ function RESULT = MAPIT(shapefile, variable, name, folder, filename)
     numColors = 256; % Typical colormap length
     numCategories = 10; % Number of categories for Jenks natural breaks
 
-    % Create a custom colormap transitioning from yellow to red, with a slightly lighter red for the highest value
+    % Create a custom colormap transitioning from yellow to red
     customColormap = [ones(numCategories, 1), linspace(1, 0, numCategories)', zeros(numCategories, 1)];
     customColormap(end, :) = [0.9, 0, 0]; % Slightly lighter red for the highest value
     
     % Read the shapefiles
     SHAPE = shaperead(shapefile); % User-specified shapefile
-    STATES = shaperead(fullfile('shape', 'states')); % States shapefile
     
     % Calculate Jenks natural breaks
     breaks = jenks(variable, numCategories);
     
     % Assign each shape to a category based on Jenks breaks
-    for i = 1:length(variable)
-        SHAPE(i).Category = find(breaks >= variable(i), 1) - 1;
+    for i = 1:length(SHAPE)
+        SHAPE(i).Category = find(variable(i) <= breaks, 1) - 1;
     end
     
     % Define the symbol specifications for the map
@@ -68,8 +67,6 @@ function RESULT = MAPIT(shapefile, variable, name, folder, filename)
     
     % Generate the map
     mapshow(SHAPE, 'Symbolspec', colorRange);
-    hold on;
-    mapshow(STATES, 'DisplayType', 'polygon', 'EdgeColor', 'k', 'FaceColor', 'none', 'LineWidth', 0.25);
     
     % Add a color bar with equal-sized intervals
     hcb = colorbar;
@@ -102,9 +99,6 @@ end
 
 function breaks = jenks(data, numCategories)
     % JENKS Calculate Jenks natural breaks for data classification.
-    %
-    % breaks = jenks(data, numCategories) calculates the Jenks natural
-    % breaks for the input data vector and the desired number of categories.
     
     data = sort(data);
     mat1 = zeros(length(data), numCategories);

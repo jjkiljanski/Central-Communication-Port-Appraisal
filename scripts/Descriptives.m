@@ -20,7 +20,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear
-load('data/output/DATAusingSW')
+load('data/output/DATAusingSW');
+
+% Define output directory
+outputDir = 'data/output';
 
 % Compute densities
 EmpDensity_n = L_n./Area_n;
@@ -30,18 +33,35 @@ lPopDensity_n = log(R_n)-log(Area_n);
 lCommImport_n = log(L_n)-log(R_n);
 
 % Map some input data
-RESULT = MAPIT('shape/VG250_KRS_clean_final',lEmpDensity_n,'Log employment density','figs','MAP_EmpDensity') 
-RESULT = MAPIT('shape/VG250_KRS_clean_final',lPopDensity_n,'Log population density','figs','MAP_PopDensity') 
-RESULT = MAPIT('shape/VG250_KRS_clean_final',lCommImport_n,'Log commuting import','figs','MAP_CommImport') 
-RESULT = MAPIT('shape/VG250_KRS_clean_final',h_price,'House price','figs','MAP_HousePrice') 
-RESULT = MAPIT('shape/VG250_KRS_clean_final',w_n,'Wage','figs','MAP_Wage') 
+writeMatrixWithHeader(lEmpDensity_n, {'Log employment density'}, outputDir, 'MAP_EmpDensity.csv');
+writeMatrixWithHeader(lPopDensity_n, {'Log population density'}, outputDir, 'MAP_PopDensity.csv');
+writeMatrixWithHeader(lCommImport_n, {'Log commuting import'}, outputDir, 'MAP_CommImport.csv');
+writeMatrixWithHeader(h_price, {'House price'}, outputDir, 'MAP_HousePrice.csv');
+writeMatrixWithHeader(w_n, {'Wage'}, outputDir, 'MAP_Wage.csv'); 
 
 % Check distances
 avDist = mean(dist_mat, 2);
-RESULT = MAPIT('shape/VG250_KRS_clean_final',avDist,'Average distance to other counties','figs','MAP_AvDist') 
+writeMatrixWithHeader(avDist, {'Average distance to other counties'}, outputDir, 'MAP_AvDist.csv');
+avDist_rail = mean(dist_mat_rail, 2);
+writeMatrixWithHeader(avDist_rail, {'Average rail distance to other counties'}, outputDir, 'MAP_AvDist_rail.csv');
+avDist_highway = mean(dist_mat_highway, 2);
+writeMatrixWithHeader(avDist_highway, {'Average road distance to other counties'}, outputDir, 'MAP_AvDist_highway.csv');
 % Distances looks sensible
 
 % Correlate commuting probabilities with distance %%%%%%%%%%%%%%%%%%%%%%%%%
+% Clear current figure
+clf;
+disp('Figure cleared.');
+
+% Create scatter plot for log-log model
+figureHandle = figure; % Explicitly create a new figure and capture its handle
+disp('New figure created.');
+
+% Check if figure was created successfully
+if isempty(figureHandle)
+    error('Failed to create a new figure.');
+end
+
 clf;
 scatter(log(dist_mat), log(comMat));
 xlabel('Distance (log)'); % Label x-axis
@@ -49,6 +69,7 @@ ylabel('Commuting probability (log)'); % Label y-axis
 title('Commuting probability, log-log model'); % Title for the plot
 grid on; % Optionally, turn the grid on for easier visualization
 print('figs/Scatter_Lambda_log_log', '-dpng', '-r300');
+
 clf;
 scatter((dist_mat), log(comMat));
 xlabel('Distance (km)'); % Label x-axis
@@ -131,12 +152,13 @@ grid on; % Optionally, turn the grid on for easier visualization
 omega_n = w_n.^epsi; 
 CommWeight_ni = dist_mat.^(-mu.*epsi);
 CMA_n = CommWeight_ni*omega_n;
-RESULT = MAPIT('shape/VG250_KRS_clean_final',log(CMA_n),'Log commuting market access','figs','MAP_CMA') 
+writeMatrixWithHeader(log(CMA_n), {'Log commuting market access'}, outputDir, 'MAP_CMA.csv');
 EmpPot_n = CommWeight_ni*L_n;
-RESULT = MAPIT('shape/VG250_KRS_clean_final',log(EmpPot_n),'Log employment potential','figs','EmpPot') 
+writeMatrixWithHeader(log(EmpPot_n), {'Log employment potential'}, outputDir, 'MAP_EmpPot.csv');
 
-% Map productivities 
-RESULT = MAPIT('shape/VG250_KRS_clean_final',log(A_n),'Log productivity','figs','MAP_A') 
+% Map productivities  
+writeMatrixWithHeader(log(A_n), {'Log productivity'}, outputDir, 'Map_A.csv');
+
 clf;
 scatter(log(A_n), log(w_n));
 xlabel('Log productivity A'); % Label x-axis
@@ -146,7 +168,7 @@ grid on; % Optionally, turn the grid on for easier visualization
 print('figs/Scatter_A_w', '-dpng', '-r300');
 
 % Map trade shares and price index
-RESULT = MAPIT('shape/VG250_KRS_clean_final',tradeshOwn,'Own trade share','figs','MAP_pi_nn') 
-RESULT = MAPIT('shape/VG250_KRS_clean_final',P_n,'Tradables price index','figs','MAP_P_n') 
+writeMatrixWithHeader(tradeshOwn, {'Own trade share'}, outputDir, 'MAP_pi_nn.csv');
+writeMatrixWithHeader(P_n, {'Tradables price index'}, outputDir, 'MAP_P_n.csv') 
 
 display('<<<<<<<<<<<<<<< Descriptive analysis completed >>>>>>>>>>>>>>>')

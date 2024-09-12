@@ -1,0 +1,5 @@
+# Ignore everything in the 'shape' folder
+./shape/*
+
+# But do not ignore files in 'shape' that contain 'powiaty'
+!./shape/*powiaty*

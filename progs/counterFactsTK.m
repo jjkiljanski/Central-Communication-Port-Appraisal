@@ -132,4 +132,5 @@ global nu delta alp sigg epsi
     % Display percentage change
     percentageChange = (welfChange(1,1) - 1) * 100;
     % Displaying the formatted text with the embedded numeric value
-    fprintf('...Change in welfare is %.2f%%\n', percentageChange);
+    %fprintf('...Change in welfare is %.2f%%\n', percentageChange);
+    %lChange(50,1)
