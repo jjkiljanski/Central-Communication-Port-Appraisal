@@ -33,7 +33,8 @@ Additional scripts have been created or modified to facilitate the analysis of t
 
 - `ReadPolandData.m`: A script to load and preprocess Poland-specific data inputs.
 - `Counterfactuals.m`: A modified counterfactual analysis script to assess the impact of the Y-line on regional economic outcomes.
-- `transport_matrix_computation.ipynb`: Python script to produce the transport matrix from shapefiles extracted from OpenSteetMap
+- `transport_matrix_computation.ipynb`: Jupyter Notebook python script to produce the transport matrix from shapefiles extracted from OpenSteetMap
+- `generate_transport_matrices.py`: Python script creating transport matrices on the basis of counties centroids, railway network and road network shapefile. It is the same code as in the `transport_matrix_computation`, but can be run in one go.
 
 ### Shapefiles
 
@@ -46,10 +47,12 @@ Poland-specific shapefiles have been added to support spatial analysis and visua
 - **KO.shp** Schema of the railway in the KO Scenario.
 
 ## How to Use This Repository
+The repository presents ready outcomes of my analysis. In order to rerun my code, you should follow the steps below:
 
-1. **Install MATLAB Toolboxes:** Ensure that all necessary MATLAB toolboxes are installed, as outlined in the original toolkit's README.
-2. **Run Scripts in Sequence:** Follow the order of script execution starting with `MRRH2018_toolkit.m` as detailed in the original README, substituting Poland-specific scripts where applicable.
-3. **Modify and Experiment:** Users are encouraged to modify the provided scripts to explore various scenarios related to the Y-line project, such as changes in travel times, employment distribution, or population shifts.
+1. **Install basic tools:** The scripts where written and executed in Python 3.12.5 version. You need to install osmosis for processing .osm.pbf files (binary files are available in the official github repository: https://github.com/openstreetmap/osmosis). Ensure that all necessary MATLAB toolboxes are installed, as outlined in the original toolkit's README.
+2. **Generate shapefiles:** Follow the steps described in the `shapes/README.md` to generate the shapefiles, and later transport matrices.
+3. **Run Scripts in Sequence:** Execute the master script `MRRH2018_toolkit.m` as detailed in the original README.
+4. **Modify and Experiment:** Users are encouraged to modify the provided scripts to explore various scenarios related to the railway network expansion scenarios, such as changes in travel times, employment distribution, or population shifts.
 
 ## Project Citation
 
