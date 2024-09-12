@@ -49,7 +49,7 @@ Poland-specific shapefiles have been added to support spatial analysis and visua
 ## How to Use This Repository
 The repository presents ready outcomes of my analysis. In order to rerun my code, you should follow the steps below:
 
-1. **Install basic tools:** The scripts where written and executed in Python 3.12.5 version. You need to install osmosis for processing .osm.pbf files (binary files are available in the official github repository: https://github.com/openstreetmap/osmosis). Ensure that all necessary MATLAB toolboxes are installed, as outlined in the original toolkit's README.
+1. **Install basic tools:** The scripts where written and executed in Python 3.12.5 version. You need to install osmosis for processing .osm.pbf files (binary files are available in the official github repository: https://github.com/openstreetmap/osmosis). Ensure that all necessary MATLAB toolboxes are installed, as outlined in the original toolkit's README. QGIS is very useful for maintaining high control over generated and processed files. I used it to manually create different scenario shapefiles.
 2. **Generate shapefiles:** Follow the steps described in the `shapes/README.md` to generate the shapefiles, and later transport matrices.
 3. **Run Scripts in Sequence:** Execute the master script `MRRH2018_toolkit.m` as detailed in the original README.
 4. **Modify and Experiment:** Users are encouraged to modify the provided scripts to explore various scenarios related to the railway network expansion scenarios, such as changes in travel times, employment distribution, or population shifts.
