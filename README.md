@@ -11,8 +11,10 @@ In this fork, the toolkit has been adapted to study the economic impacts of the 
 2. The so called "Spokes" project proposed by PiS government
 3. The KO project proposed by the new government that came to power in the late 2023.
 
-![y-line-schema](https://github.com/user-attachments/assets/5d4a3f60-32c7-4b2c-914f-b75b7f16468b)
-![pis-spokes-schema](https://github.com/user-attachments/assets/c1e410e1-f907-42f0-b5f4-2a92e8966c74)
+![y-line-schema](https://github.com/user-attachments/assets/ea8ae551-e441-46eb-92d2-9407fb89191a)
+
+![pis-spokes-schema](https://github.com/user-attachments/assets/b2245ebe-b569-497b-bd8e-07f13c55c92e)
+
 ![ko-schema](https://github.com/user-attachments/assets/57c6316c-e990-4719-bd14-ed3cad8c7f74)
 
 
