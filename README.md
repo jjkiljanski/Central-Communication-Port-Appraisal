@@ -76,4 +76,4 @@ Please also consider citing the original toolkit and the relevant academic paper
 
 ## Acknowledgments
 
-This project was prepared as part of the Quantitative Spatial Economics course taught by Professor Gabriel Ahlfeldt at Humboldt University of Berlin. It builds on the original toolkit developed by Gabriel Ahlfeldt and Tobias Seidel. The toolkit, as well as the QSE course, have been instrumental in the development of this project. I would like to extend my sincere thanks to Professor Ahlfeldt for his guidance and support throughout the course.
+This project was prepared as part of the Quantitative Spatial Economics course taught by Professor Gabriel Ahlfeldt at Humboldt University of Berlin. It builds on the original toolkit developed by Gabriel Ahlfeldt and Tobias Seidel. The toolkit, as well as the QSE course, have been instrumental in the development of this project. I would like to extend my sincere thanks to Professor Ahlfeldt and Andrea Herrera Bórquez for their guidance and support throughout the course.
