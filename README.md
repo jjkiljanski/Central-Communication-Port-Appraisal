@@ -13,7 +13,9 @@ In this fork, the toolkit has been adapted to study the economic impacts of the 
 
 ![y-line-schema](https://github.com/user-attachments/assets/5d4a3f60-32c7-4b2c-914f-b75b7f16468b)
 ![pis-spokes-schema](https://github.com/user-attachments/assets/c1e410e1-f907-42f0-b5f4-2a92e8966c74)
-![ko-schema](https://github.com/user-attachments/assets/1cecffd7-6479-4813-ae44-f647fe7234ff)
+![ko-schema](https://github.com/user-attachments/assets/57c6316c-e990-4719-bd14-ed3cad8c7f74)
+
+
 
 
 
