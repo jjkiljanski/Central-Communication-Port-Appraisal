@@ -2,6 +2,8 @@
 
 **© Jan Kiljański**
 
+If you are only interested in the final estimates, please see the [figs/counterfactuals](https://github.com/jjkiljanski/Central-Communication-Port-Appraisal/tree/78403c53163ccd6cccd83ee956e9135552485c83/figs/counterfactuals) for plots. Numeric outcomes are stored in [data/output](https://github.com/jjkiljanski/Central-Communication-Port-Appraisal/tree/78403c53163ccd6cccd83ee956e9135552485c83/data/output).
+
 ## Project Overview
 
 This repository is a fork of the "Toolkit for Quantitative Spatial Models" developed by Gabriel Ahlfeldt and Tobias Seidel. The original repository provides a MATLAB framework for simulating and analyzing quantitative spatial economic model à la Monte, Redding, and Rossi-Hansberg (2018).
